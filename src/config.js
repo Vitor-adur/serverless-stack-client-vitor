@@ -1,4 +1,6 @@
 export default {
+  MAX_ATTACHMENT_SIZE: 5000000,
+  STRIPE_KEY: "pk_test_51Gze72AdyQwnaJAHJnrrymX2o9mYmtdRKbbV1xX1yXp5Dsz8UBRAKePEIW2EhiCDSeeW5DLby5HonUZuAKRSgwVw007QP1a7gg",
     s3: {
       REGION: "us-east-1",
       BUCKET: "notes-app-uploads-vitor"
