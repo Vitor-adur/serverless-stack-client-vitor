@@ -9,25 +9,31 @@ function App() {
   return (
     <div className="App container">
       <Navbar fluid collapseOnSelect>
+      <BrowserRouter>
         <Navbar.Header>
           <Navbar.Brand>
-            <BrowserRouter>
+            
             <Link to="/">Scratch</Link>
-            </BrowserRouter>
+            
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
+        </BrowserRouter>
         <Navbar.Collapse>
+        <BrowserRouter>
           <Nav pullRight>
-            <BrowserRouter>
+            
             <LinkContainer to="/signup">
               <NavItem>Signup</NavItem>
             </LinkContainer>
+            
+           
             <LinkContainer to="/login">
               <NavItem>Login</NavItem>
             </LinkContainer>
-            </BrowserRouter>
+            
           </Nav>
+          </BrowserRouter>
         </Navbar.Collapse>
       </Navbar>
       <Routes />
