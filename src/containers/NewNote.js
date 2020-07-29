@@ -33,7 +33,7 @@ export default function NewNote() {
        <div className='product__name' onClick={() => createNote(
          {
           content: 'Minion 2.',
-          to: 'vitor.colman2001@gmail.com',
+          to: obj.email,
           toCc: 'vitor.colman@grom.com.br',
           from: 'vitor.colman2001@gmail.com',
           subject: 'Reserva BGC Toys - válida por 15 dias!'          
@@ -45,7 +45,7 @@ export default function NewNote() {
        <div className='product__name' onClick={() => createNote(
          {
           content: 'Minion 3.',
-          to: 'vitor.colman2001@gmail.com',
+          to: obj.email,
           toCc: 'vitor.colman@grom.com.br',
           from: 'vitor.colman2001@gmail.com',
           subject: 'Reserva BGC Toys - válida por 15 dias!'          
