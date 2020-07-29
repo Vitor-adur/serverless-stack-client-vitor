@@ -99,7 +99,7 @@ export default function Notes() {
     event.preventDefault();
   
     const confirmed = window.confirm(
-      "Are you sure you want to delete this note?"
+      "Tem certeza que deseja cancelar sua reserva?"
     );
   
     if (!confirmed) {
@@ -143,7 +143,7 @@ export default function Notes() {
             </FormGroup>
           )}
           <FormGroup controlId="file">
-            {!note.attachment && <ControlLabel>Attachment</ControlLabel>}
+            {!note.attachment && <ControlLabel>Anexo</ControlLabel>}
             <FormControl onChange={handleFileChange} type="file" />
           </FormGroup>
           <LoaderButton
@@ -154,7 +154,7 @@ export default function Notes() {
             isLoading={isLoading}
             disabled={!validateForm()}
           >
-            Save
+            Salvar Alterações
           </LoaderButton>
           <LoaderButton
             block
@@ -163,7 +163,7 @@ export default function Notes() {
             onClick={handleDelete}
             isLoading={isDeleting}
           >
-            Delete
+            Cancelar Reserva
           </LoaderButton>
         </form>
       )}

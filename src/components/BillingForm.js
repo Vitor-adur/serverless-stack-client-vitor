@@ -38,26 +38,26 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
   return (
     <form className="BillingForm" onSubmit={handleSubmitClick}>
       <FormGroup bsSize="large" controlId="storage">
-        <ControlLabel>Storage</ControlLabel>
+        <ControlLabel>Quantidade de Produtos</ControlLabel>
         <FormControl
           min="0"
           type="number"
           value={fields.storage}
           onChange={handleFieldChange}
-          placeholder="Number of notes to store"
+          placeholder="1,2,3,..."
         />
       </FormGroup>
       <hr />
       <FormGroup bsSize="large" controlId="name">
-        <ControlLabel>Cardholder&apos;s name</ControlLabel>
+        <ControlLabel>Nome do Titular</ControlLabel>
         <FormControl
           type="text"
           value={fields.name}
           onChange={handleFieldChange}
-          placeholder="Name on the card"
+          placeholder="NOME EXEMPLO CARTÃO"
         />
       </FormGroup>
-      <ControlLabel>Credit Card Info</ControlLabel>
+      <ControlLabel>Número do cartão</ControlLabel>
       <CardElement
         className="card-field"
         onChange={e => setIsCardComplete(e.complete)}
@@ -72,7 +72,7 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
         isLoading={isLoading}
         disabled={!validateForm()}
       >
-        Purchase
+        Pagar
       </LoaderButton>
     </form>
   );

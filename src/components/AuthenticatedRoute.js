@@ -4,10 +4,10 @@ import { useAppContext } from "../libs/contextLib";
 
 export default function AuthenticatedRoute({ children, ...rest }) {
   const { pathname, search } = useLocation();
-  const { isAuthenticated } = useAppContext();
+  const { obj } = useAppContext();
   return (
     <Route {...rest}>
-      {isAuthenticated ? (
+      {obj.isAuthenticated ? (
         children
       ) : (
         <Redirect to={

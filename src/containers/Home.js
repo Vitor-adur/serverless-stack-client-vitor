@@ -8,12 +8,12 @@ import { LinkContainer } from "react-router-bootstrap";
 
 export default function Home() {
   const [notes, setNotes] = useState([]);
-  const { isAuthenticated } = useAppContext();
+  const { obj } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function onLoad() {
-      if (!isAuthenticated) {
+      if (!obj.isAuthenticated) {
         return;
       }
   
@@ -28,7 +28,7 @@ export default function Home() {
     }
   
     onLoad();
-  }, [isAuthenticated]);
+  }, [obj.isAuthenticated]);
   
   function loadNotes() {
     return API.get("notes", "/notes");
@@ -46,7 +46,7 @@ export default function Home() {
         <LinkContainer key="new" to="/notes/new">
           <ListGroupItem>
             <h4>
-              <b>{"\uFF0B"}</b> Create a new note
+              <b>{"\uFF0B"}</b> Fazer nova reserva
             </h4>
           </ListGroupItem>
         </LinkContainer>
@@ -57,8 +57,8 @@ export default function Home() {
   function renderLander() {
     return (
       <div className="lander">
-        <h1>Scratch</h1>
-        <p>A simple note taking app</p>
+        <h1>BGC Toys</h1>
+        <p>Sua loja para compra de bonecos Minions</p>
       </div>
     );
   }
@@ -66,7 +66,7 @@ export default function Home() {
   function renderNotes() {
     return (
       <div className="notes">
-        <PageHeader>Your Notes</PageHeader>
+        <PageHeader>Suas compras</PageHeader>
         <ListGroup>
           {!isLoading && renderNotesList(notes)}
         </ListGroup>
@@ -76,7 +76,7 @@ export default function Home() {
 
   return (
     <div className="Home">
-      {isAuthenticated ? renderNotes() : renderLander()}
+      {obj.isAuthenticated ? renderNotes() : renderLander()}
     </div>
   );
 }

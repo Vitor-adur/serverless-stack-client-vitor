@@ -12,7 +12,6 @@ import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 
 export default function Routes() {
   return (
-    <BrowserRouter>
       <Switch>
         <UnauthenticatedRoute exact path="/login">
           <Login />
@@ -37,6 +36,5 @@ export default function Routes() {
           <NotFound />
         </Route>
       </Switch>
-    </BrowserRouter>
   );
 }

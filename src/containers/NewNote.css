@@ -6,3 +6,20 @@
     height: 300px;
     font-size: 24px;
   }
+
+.product__name {
+  width: 200px;
+  height: 20px;
+  background-color: rgb(112, 208, 211);
+  cursor: pointer;
+  padding: 20px;
+  margin-top: 50px;
+  justify-content: center;
+  border-radius: 10px;
+  border: black solid 3px;
+  text-align: center;
+}
+
+.product__name h1 {
+  margin: -21px;
+}

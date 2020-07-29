@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import { AppContext } from "./libs/contextLib";
@@ -9,9 +9,8 @@ import "./App.css";
 import Routes from "./Routes";
 
 function App() {
-//  const history = useHistory();
   const [isAuthenticating, setIsAuthenticating] = useState(true);
-  const [isAuthenticated, userHasAuthenticated] = useState(false);
+  const [obj, userHasAuthenticated] = useState({isAuthenticated: false, email: ''});
   
   useEffect(() => {
     onLoad();
@@ -20,7 +19,8 @@ function App() {
   async function onLoad() {
     try {
       await Auth.currentSession();
-      userHasAuthenticated(true);
+      const userAttributes = await Auth.currentAuthenticatedUser()
+      userHasAuthenticated({isAuthenticated: true, email: userAttributes.attributes.email});
     }
     catch(e) {
       if (e !== 'No current user') {
@@ -34,50 +34,48 @@ function App() {
   async function handleLogout() {
     await Auth.signOut();
   
-    userHasAuthenticated(false);
+    userHasAuthenticated({isAuthenticated: false, email: ''});
 
-//   history.push("/login");
   }
 
   return (
     !isAuthenticating && (
       <div className="App container">
         <Navbar fluid collapseOnSelect>
-          <BrowserRouter>
+          
             <Navbar.Header>
               <Navbar.Brand>
-                <Link to="/">Scratch</Link>
+                <Link to="/">BGC Toys</Link>
               </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav pullRight>
-                {isAuthenticated ? (
+                {obj.isAuthenticated ? (
                   <>
                     <LinkContainer to="/settings">
-                      <NavItem>Settings</NavItem>
+                      <NavItem>Configurações</NavItem>
                     </LinkContainer>
-                    <NavItem onClick={handleLogout}>Logout</NavItem>
+                    <NavItem onClick={handleLogout}>Sair</NavItem>
                   </>
                 ) : (
                   <>
                     <LinkContainer to="/signup">
-                      <NavItem>Signup</NavItem>
+                      <NavItem>Cadastrar</NavItem>
                     </LinkContainer>
                     <LinkContainer to="/login">
-                      <NavItem>Login</NavItem>
+                      <NavItem>Entrar</NavItem>
                     </LinkContainer>
                   </>
                 )}
               </Nav>
             </Navbar.Collapse>
-          </BrowserRouter>
         </Navbar>
         <AppContext.Provider
-          value={{ isAuthenticated, userHasAuthenticated }}
+          value={{ obj, userHasAuthenticated }}
         >
           <Routes />
-        </AppContext.Provider>
+        </AppContext.Provider> 
       </div>
     )
   );

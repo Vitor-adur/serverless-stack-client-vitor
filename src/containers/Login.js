@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createContext} from "react";
 import { Auth } from "aws-amplify";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
@@ -7,6 +7,8 @@ import { useFormFields } from "../libs/hooksLib";
 import { onError } from "../libs/errorLib";
 import "./Login.css";
 
+export const Context = createContext({});
+
 export default function Login() {
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
@@ -14,6 +16,7 @@ export default function Login() {
     email: "",
     password: ""
   });
+  
 
   function validateForm() {
     return fields.email.length > 0 && fields.password.length > 0;
@@ -26,7 +29,7 @@ export default function Login() {
 
     try {
       await Auth.signIn(fields.email, fields.password);
-      userHasAuthenticated(true);
+      userHasAuthenticated({isAuthenticated: true, email: fields.email});
     } catch (e) {
       onError(e);
       setIsLoading(false);
@@ -38,21 +41,22 @@ export default function Login() {
       <form onSubmit={handleSubmit}>
         <FormGroup controlId="email" bsSize="large">
           <ControlLabel>Email</ControlLabel>
+          
           <FormControl
             autoFocus
             type="email"
             value={fields.email}
             onChange={handleFieldChange}
           />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
-          <ControlLabel>Password</ControlLabel>
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+          <ControlLabel>Senha</ControlLabel>
           <FormControl
             type="password"
             value={fields.password}
             onChange={handleFieldChange}
           />
-        </FormGroup>
+          </FormGroup>
         <LoaderButton
           block
           type="submit"
@@ -60,7 +64,7 @@ export default function Login() {
           isLoading={isLoading}
           disabled={!validateForm()}
         >
-          Login
+          Entrar
         </LoaderButton>
       </form>
     </div>

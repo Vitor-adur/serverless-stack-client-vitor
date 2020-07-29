@@ -64,7 +64,7 @@ export default function Signup() {
       await Auth.confirmSignUp(fields.email, fields.confirmationCode);
       await Auth.signIn(fields.email, fields.password);
   
-      userHasAuthenticated(true);
+      userHasAuthenticated({isAuthenticated: true, email: fields.email});
       history.push("/");
     } catch (e) {
       onError(e);
@@ -76,14 +76,14 @@ export default function Signup() {
     return (
       <form onSubmit={handleConfirmationSubmit}>
         <FormGroup controlId="confirmationCode" bsSize="large">
-          <ControlLabel>Confirmation Code</ControlLabel>
+          <ControlLabel>Código de Confirmação</ControlLabel>
           <FormControl
             autoFocus
             type="tel"
             onChange={handleFieldChange}
             value={fields.confirmationCode}
           />
-          <HelpBlock>Please check your email for the code.</HelpBlock>
+          <HelpBlock>Por favor, insira o código que receber no seu email.</HelpBlock>
         </FormGroup>
         <LoaderButton
           block
@@ -92,7 +92,7 @@ export default function Signup() {
           isLoading={isLoading}
           disabled={!validateConfirmationForm()}
         >
-          Verify
+          Verificar
         </LoaderButton>
       </form>
     );
@@ -111,7 +111,7 @@ export default function Signup() {
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
-          <ControlLabel>Password</ControlLabel>
+          <ControlLabel>Senha</ControlLabel>
           <FormControl
             type="password"
             value={fields.password}
@@ -119,7 +119,7 @@ export default function Signup() {
           />
         </FormGroup>
         <FormGroup controlId="confirmPassword" bsSize="large">
-          <ControlLabel>Confirm Password</ControlLabel>
+          <ControlLabel>Confirmar Senha</ControlLabel>
           <FormControl
             type="password"
             onChange={handleFieldChange}
@@ -133,7 +133,7 @@ export default function Signup() {
           isLoading={isLoading}
           disabled={!validateForm()}
         >
-          Signup
+          Cadastrar
         </LoaderButton>
       </form>
     );
